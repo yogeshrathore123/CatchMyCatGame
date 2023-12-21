@@ -25,6 +25,7 @@ class ViewController: UIViewController {
     var timer = Timer()
     var counter = 0
     var score = 0
+    var highScore = 0
     
     var hideCatTimer = Timer()
     var catImageArray = [UIImageView]()
@@ -36,6 +37,16 @@ class ViewController: UIViewController {
         setUpImageView()
         
         scoreLabel.text = "Score: \(score)"
+        
+        let highScoreSavedValue = UserDefaults.standard.object(forKey: "highScore")
+        
+        if highScoreSavedValue == nil {
+            highScoreLabel.text = "High Score: \(highScore)"
+        }
+        
+        if let highScoreValue = highScoreSavedValue as? Int {
+            highScoreLabel.text = "High Score: \(highScoreValue)"
+        }
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCountDown), userInfo: nil, repeats: true)
         counter = 10
@@ -59,9 +70,24 @@ class ViewController: UIViewController {
                 cat.isHidden = true
             }
             
+            if score > highScore {
+                highScore = score
+                highScoreLabel.text = "High Score: \(self.highScore)"
+                UserDefaults.standard.setValue(highScore, forKey: "highScore")
+            }
+            
             let alert = UIAlertController(title: "Time`s Up", message: "Do you want to play again ?", preferredStyle: .alert)
             let okButton = UIAlertAction(title: "OK", style: .default)
             let replayButton = UIAlertAction(title: "Replay", style: .default) { alert in
+                
+                self.score = 0
+                self.scoreLabel.text = "Score: \(self.score)"
+                
+                self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerCountDown), userInfo: nil, repeats: true)
+                self.counter = 10
+                self.timeLabel.text = String(self.counter)
+                
+                self.hideCatTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.hideCatTimerCount), userInfo: nil, repeats: true)
                 
             }
             alert.addAction(okButton)
