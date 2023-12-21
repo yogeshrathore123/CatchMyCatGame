@@ -22,6 +22,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var catImageView8: UIImageView!
     @IBOutlet weak var catImageView9: UIImageView!
     
+    @IBOutlet weak var startBarButton: UIBarButtonItem!
     var timer = Timer()
     var counter = 0
     var score = 0
@@ -48,8 +49,9 @@ class ViewController: UIViewController {
             highScoreLabel.text = "High Score: \(highScoreValue)"
         }
         
+        startBarButton.isEnabled = false
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCountDown), userInfo: nil, repeats: true)
-        counter = 10
+        counter = 30
         timeLabel.text = String(counter)
         
         hideCatTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(hideCatTimerCount), userInfo: nil, repeats: true)
@@ -65,6 +67,7 @@ class ViewController: UIViewController {
         if counter == 0 {
             timer.invalidate()
             hideCatTimer.invalidate()
+            startBarButton.isEnabled = true
             
             for cat in catImageArray {
                 cat.isHidden = true
@@ -79,12 +82,12 @@ class ViewController: UIViewController {
             let alert = UIAlertController(title: "Time`s Up", message: "Do you want to play again ?", preferredStyle: .alert)
             let okButton = UIAlertAction(title: "OK", style: .default)
             let replayButton = UIAlertAction(title: "Replay", style: .default) { alert in
-                
+                self.startBarButton.isEnabled = false
                 self.score = 0
                 self.scoreLabel.text = "Score: \(self.score)"
                 
                 self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerCountDown), userInfo: nil, repeats: true)
-                self.counter = 10
+                self.counter = 30
                 self.timeLabel.text = String(self.counter)
                 
                 self.hideCatTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.hideCatTimerCount), userInfo: nil, repeats: true)
@@ -93,6 +96,8 @@ class ViewController: UIViewController {
             alert.addAction(okButton)
             alert.addAction(replayButton)
             self.present(alert, animated: true)
+        } else {
+            startBarButton.isEnabled = false
         }
         
     }
@@ -103,7 +108,6 @@ class ViewController: UIViewController {
         }
         
         let randomCat = arc4random_uniform(UInt32(catImageArray.count - 1))
-        print("random = \(randomCat)")
         catImageArray[Int(randomCat)].isHidden = false
     }
     
@@ -156,6 +160,17 @@ class ViewController: UIViewController {
         
     }
 
-
+    @IBAction func statGameAgainDidTap(_ sender: UIBarButtonItem) {
+        startBarButton.isEnabled = false
+        self.score = 0
+        self.scoreLabel.text = "Score: \(self.score)"
+        
+        self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerCountDown), userInfo: nil, repeats: true)
+        self.counter = 30
+        self.timeLabel.text = String(self.counter)
+        
+        self.hideCatTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.hideCatTimerCount), userInfo: nil, repeats: true)
+    }
+    
 }
 
