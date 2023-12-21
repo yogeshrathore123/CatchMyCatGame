@@ -22,7 +22,12 @@ class ViewController: UIViewController {
     @IBOutlet weak var catImageView8: UIImageView!
     @IBOutlet weak var catImageView9: UIImageView!
     
+    var timer = Timer()
+    var counter = 0
     var score = 0
+    
+    var hideCatTimer = Timer()
+    var catImageArray = [UIImageView]()
     
     
     override func viewDidLoad() {
@@ -31,12 +36,55 @@ class ViewController: UIViewController {
         setUpImageView()
         
         scoreLabel.text = "Score: \(score)"
+        
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCountDown), userInfo: nil, repeats: true)
+        counter = 10
+        timeLabel.text = String(counter)
+        
+        hideCatTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(hideCatTimerCount), userInfo: nil, repeats: true)
     
         
         
     }
     
+    @objc func timerCountDown() {
+        counter -= 1
+        timeLabel.text = String(counter)
+        
+        if counter == 0 {
+            timer.invalidate()
+            hideCatTimer.invalidate()
+            
+            for cat in catImageArray {
+                cat.isHidden = true
+            }
+            
+            let alert = UIAlertController(title: "Time`s Up", message: "Do you want to play again ?", preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default)
+            let replayButton = UIAlertAction(title: "Replay", style: .default) { alert in
+                
+            }
+            alert.addAction(okButton)
+            alert.addAction(replayButton)
+            self.present(alert, animated: true)
+        }
+        
+    }
+    
+    @objc func hideCatTimerCount() {
+        for cat in catImageArray {
+            cat.isHidden = true
+        }
+        
+        let randomCat = arc4random_uniform(UInt32(catImageArray.count - 1))
+        print("random = \(randomCat)")
+        catImageArray[Int(randomCat)].isHidden = false
+    }
+    
     private func setUpImageView() {
+        
+        catImageArray = [catImageView1, catImageView2, catImageView3, catImageView4, catImageView5, catImageView6, catImageView7, catImageView8, catImageView9]
+        
         // Add Gesture on ImageView
         catImageView1.isUserInteractionEnabled = true
         catImageView2.isUserInteractionEnabled = true
