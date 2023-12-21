@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 
@@ -30,6 +31,8 @@ class ViewController: UIViewController {
     
     var hideCatTimer = Timer()
     var catImageArray = [UIImageView]()
+    
+    var player: AVAudioPlayer?
     
     
     override func viewDidLoad() {
@@ -155,6 +158,7 @@ class ViewController: UIViewController {
     }
     
     @objc func increaseScore() {
+        playCatSound()
         score += 1
         scoreLabel.text = "Score: \(score)"
         
@@ -170,6 +174,21 @@ class ViewController: UIViewController {
         self.timeLabel.text = String(self.counter)
         
         self.hideCatTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.hideCatTimerCount), userInfo: nil, repeats: true)
+    }
+    
+    private func playCatSound() {
+        guard let path = Bundle.main.path(forResource: "catSound", ofType: "mp3") else {
+            return
+        }
+        
+        let url = URL(fileURLWithPath: path)
+        
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            player?.play()
+        } catch let error {
+            print(error.localizedDescription)
+        }
     }
     
 }

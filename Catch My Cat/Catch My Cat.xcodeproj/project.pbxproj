@@ -16,6 +16,7 @@
 		AB4F4CE32B346AFC0090D5FD /* Catch_My_CatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F4CE22B346AFC0090D5FD /* Catch_My_CatTests.swift */; };
 		AB4F4CED2B346AFC0090D5FD /* Catch_My_CatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F4CEC2B346AFC0090D5FD /* Catch_My_CatUITests.swift */; };
 		AB4F4CEF2B346AFC0090D5FD /* Catch_My_CatUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F4CEE2B346AFC0090D5FD /* Catch_My_CatUITestsLaunchTests.swift */; };
+		AB4F4CFC2B34D3250090D5FD /* catSound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AB4F4CFB2B34D3250090D5FD /* catSound.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		AB4F4CE82B346AFC0090D5FD /* Catch My CatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Catch My CatUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AB4F4CEC2B346AFC0090D5FD /* Catch_My_CatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catch_My_CatUITests.swift; sourceTree = "<group>"; };
 		AB4F4CEE2B346AFC0090D5FD /* Catch_My_CatUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catch_My_CatUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		AB4F4CFB2B34D3250090D5FD /* catSound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = catSound.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				AB4F4CCF2B346AFA0090D5FD /* ViewController.swift */,
 				AB4F4CD12B346AFA0090D5FD /* Main.storyboard */,
 				AB4F4CD42B346AFC0090D5FD /* Assets.xcassets */,
+				AB4F4CFB2B34D3250090D5FD /* catSound.mp3 */,
 				AB4F4CD62B346AFC0090D5FD /* LaunchScreen.storyboard */,
 				AB4F4CD92B346AFC0090D5FD /* Info.plist */,
 			);
@@ -234,6 +237,7 @@
 				AB4F4CD82B346AFC0090D5FD /* LaunchScreen.storyboard in Resources */,
 				AB4F4CD52B346AFC0090D5FD /* Assets.xcassets in Resources */,
 				AB4F4CD32B346AFA0090D5FD /* Main.storyboard in Resources */,
+				AB4F4CFC2B34D3250090D5FD /* catSound.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
